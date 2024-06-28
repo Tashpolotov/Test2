@@ -15,4 +15,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "Test"
 include(":app")
- 
+include(":breafly")
+include(":hotel")
+include(":profile")
+include(":subscriptions")
+include(":ticket")
+include(":core:core_utils")

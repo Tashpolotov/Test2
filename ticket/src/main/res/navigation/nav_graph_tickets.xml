@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_tiket"
+    app:startDestination="@id/tiketFragment">
+
+    <fragment
+        android:id="@+id/allTicketsFragment"
+        android:name="com.example.ticket.presentation.ui.fragments.allticketfragment.AllTicketsFragment"
+        android:label="fragment_all_tickets"
+        tools:layout="@layout/fragment_all_tickets" >
+        <action
+            android:id="@+id/action_allTicketsFragment_to_searchCityFragment"
+            app:destination="@id/searchCityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mockFragment"
+        android:name="com.example.ticket.presentation.ui.fragments.mockfragment.MockFragment"
+        android:label="fragment_mock"
+        tools:layout="@layout/fragment_mock" >
+        <action
+            android:id="@+id/action_mockFragment_to_tiketFragment"
+            app:destination="@id/tiketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchCityFragment"
+        android:name="com.example.ticket.presentation.ui.fragments.searchfragment.SearchCityFragment"
+        android:label="fragment_search_city"
+        tools:layout="@layout/fragment_search_city" >
+        <action
+            android:id="@+id/action_searchCityFragment_to_allTicketsFragment"
+            app:destination="@id/allTicketsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tiketFragment"
+        android:name="com.example.ticket.presentation.ui.fragments.tiketfragment.TiketFragment"
+        android:label="fragment_tiket"
+        tools:layout="@layout/fragment_tiket" >
+        <action
+            android:id="@+id/action_tiketFragment_to_searchCityFragment"
+            app:destination="@id/searchCityFragment" />
+        <action
+            android:id="@+id/action_tiketFragment_to_mockFragment"
+            app:destination="@id/mockFragment" />
+    </fragment>
+</navigation>

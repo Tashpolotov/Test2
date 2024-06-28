@@ -1,0 +1,41 @@
+<resources>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sale_tiket">Поиск дешевых авиабилетов</string>
+    <string name="minsk">Минск</string>
+    <string name="where">Куда - Турция</string>
+    <string name="music">Музыкально отлететь</string>
+    <string name="budapesht">Будапешт</string>
+    <string name="view_all">Показать все места</string>
+    <string name="strong">Сложный маршрут</string>
+    <string name="where1">Куда угодно</string>
+    <string name="got">Горячие     билеты</string>
+    <string name="weekend">Выходные</string>
+    <string name="stambul">Стамбул</string>
+    <string name="popular">Популярные направления</string>
+    <string name="sochi">Сочи</string>
+    <string name="phuchet">Phuchet</string>
+    <string name="back">обратно</string>
+    <string name="fist">Ваш первый раз</string>
+    <string name="most_comfortable">Самый удобный</string>
+    <string name="price">6 990</string>
+    <string name="time">03:15 - 07:10</string>
+    <string name="vko">VKO</string>
+    <string name="aer">AER</string>
+    <string name="arrive">4ч в пути / Без пересадок</string>
+    <string name="name">Die Antwoord</string>
+    <string name="date">24 фев, сб</string>
+    <string name="people">1, эконом</string>
+    <string name="reis">Прямые рельсы</string>
+    <string name="line">Уральские авиалинии</string>
+    <string name="datee">07:00</string>
+    <string name="category_line">Подеба</string>
+    <string name="viewAll">Показать все</string>
+    <string name="searchTicket">Посмотреть все билеты</string>
+    <string name="mock_text">К сожалению данных по этому направлению не доступны</string>
+    <string name="arrow">Назад</string>
+    <string name="tv_where">Москва-Сочи</string>
+    <string name="date_people">23 февраля, 1 пассажир</string>
+    <string name="filter">Фильтр</string>
+    <string name="graf_price">График цен</string>
+</resources>
