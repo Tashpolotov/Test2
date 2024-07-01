@@ -5,19 +5,31 @@ import com.example.ticket.data.model.alltikets.DepartureData
 import com.example.ticket.data.model.alltikets.HandLuggageData
 import com.example.ticket.data.model.alltikets.LuggageData
 import com.example.ticket.data.model.alltikets.PriceXData
+import com.example.ticket.domain.model.allteickets.Arrival
+import com.example.ticket.domain.model.allteickets.Departure
+import com.example.ticket.domain.model.allteickets.HandLuggage
+import com.example.ticket.domain.model.allteickets.Luggage
+import com.example.ticket.domain.model.allteickets.PriceX
+import com.google.gson.annotations.SerializedName
 
 data class TicketData(
-    val arrival: ArrivalData,
-    val badge: String,
+    val arrival: Arrival,
+    val badge: String? = null,
     val company: String,
-    val departure: DepartureData,
-    val hand_luggage: HandLuggageData,
-    val has_transfer: Boolean,
-    val has_visa_transfer: Boolean,
+    val departure: Departure,
+    @SerializedName("hand_luggage")
+    val handLuggage: HandLuggage,
+    @SerializedName("has_transfer")
+    val hasTransfer: Boolean,
+    @SerializedName("has_visa_transfer")
+    val hasVisaTransfer: Boolean,
     val id: Int,
-    val is_exchangable: Boolean,
-    val is_returnable: Boolean,
-    val luggage: LuggageData,
-    val price: PriceXData,
-    val provider_name: String
+    @SerializedName("is_exchangable")
+    val isExchangable: Boolean,
+    @SerializedName("is_returnable")
+    val isReturnable: Boolean,
+    val luggage: Luggage,
+    val price: PriceX,
+    @SerializedName("provider_name")
+    val providerName: String
 )

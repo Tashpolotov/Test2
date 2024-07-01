@@ -32,10 +32,6 @@ class MainViewModel @Inject constructor(private val useCase: MainUseCase) : Base
         }
     }
 
-    fun updateCyrillicFilter(filter: InputFilter?) {
-        _cyrillicFilter.value = filter
-    }
-
     fun loadMainScreen() {
         viewModelScope.launch {
             useCase.getMainScreen().collectData(_mainScreen)

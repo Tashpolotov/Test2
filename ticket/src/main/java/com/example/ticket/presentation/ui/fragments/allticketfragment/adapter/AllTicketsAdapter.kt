@@ -1,17 +1,19 @@
 package com.example.ticket.presentation.ui.fragments.allticketfragment.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ticket.R
 import com.example.ticket.domain.model.allteickets.Ticket
 import com.example.ticket.databinding.ItemAllTicketBinding
 import java.time.Duration
 import java.time.LocalDateTime
 
-class AllTicketsAdapter:ListAdapter<Ticket, AllTicketsAdapter.AllTicketsViewHolder>(AllTicketsDiff()) {
+class AllTicketsAdapter(val context: Context):ListAdapter<Ticket, AllTicketsAdapter.AllTicketsViewHolder>(AllTicketsDiff()) {
 
     inner class AllTicketsViewHolder(private val binding: ItemAllTicketBinding):RecyclerView.ViewHolder(binding.root) {
         fun bind(model: Ticket) {
@@ -33,9 +35,9 @@ class AllTicketsAdapter:ListAdapter<Ticket, AllTicketsAdapter.AllTicketsViewHold
             val hours = flightDuration.toHours()
             val minutes = flightDuration.minusHours(hours).toMinutes()
 
-            val flightTime = String.format("%02d:%02dч в пути", hours, minutes)
-            val transferText = if (model.has_transfer) "" else "Без пересадок"
-            val flightInfo = if (model.has_transfer) flightTime else "$flightTime / $transferText"
+            val flightTime = String.format(context.getString(R.string.date_line), hours, minutes)
+            val transferText = if (model.hasTransfer) "" else context.getString(R.string.noTransverrs)
+            val flightInfo = if (model.hasTransfer) flightTime else "$flightTime / $transferText"
             binding.tvArrive.text = flightInfo
         }
     }

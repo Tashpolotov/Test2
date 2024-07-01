@@ -15,17 +15,17 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-
+import javax.inject.Inject
 @AndroidEntryPoint
 class SearchCityFragment : BaseFragment(R.layout.fragment_search_city) {
 
     private val binding by viewBinding(FragmentSearchCityBinding::bind)
     private val viewModel by viewModels<SearchViewModel>()
-    private lateinit var sharedPref: SharedPref
+    @Inject
+    lateinit var sharedPref: SharedPref
 
     override fun initialize() {
         viewModel.loadSearch()
-        sharedPref = SharedPref(requireContext())
         binding.etWhere.text = sharedPref.selectedName.toString()
         if (sharedPref.selectedUserCity != null) {
             binding.etLocationCity.setText(sharedPref.selectedUserCity)
@@ -36,13 +36,11 @@ class SearchCityFragment : BaseFragment(R.layout.fragment_search_city) {
         binding.imgSwap.setOnClickListener {
             val textFrom = binding.etWhere.text.toString()
             val textTo = binding.etLocationCity.text.toString()
-
             binding.etWhere.setText(textTo)
             binding.etLocationCity.setText(textFrom)
         }
         initTextView()
     }
-
     override fun initSubscribers() {
         viewModel.search.collectUIState(
             state = {
@@ -58,12 +56,11 @@ class SearchCityFragment : BaseFragment(R.layout.fragment_search_city) {
             }
         )
     }
-
     private fun populateViews(response: TicketOfferResponse) {
-        val tickets = response.tickets_offers
-        val timeRanges = tickets.get(0).time_range?.joinToString(", ")
-        val timeRanges1 = tickets.get(1).time_range?.joinToString(", ")
-        val timeRanges2 = tickets.get(2).time_range?.joinToString(", ")
+        val tickets = response.ticketsOffers
+        val timeRanges = tickets.get(0).timeRange?.joinToString(", ")
+        val timeRanges1 = tickets.get(1).timeRange?.joinToString(", ")
+        val timeRanges2 = tickets.get(2).timeRange?.joinToString(", ")
 
         binding.apply {
             tvCategoryLine.text = tickets.getOrNull(0)?.title
@@ -79,19 +76,15 @@ class SearchCityFragment : BaseFragment(R.layout.fragment_search_city) {
             tvTimeWhite.text = timeRanges2
         }
     }
-
     private fun initTextView(){
         val currentDate = SimpleDateFormat("d MMM E", Locale.getDefault()).format(Date())
         binding.tvDate.text = currentDate
-
         binding.linearContDate.setOnClickListener {
             openDatePicker(setDate = true)
         }
-
         binding.linearContBack.setOnClickListener {
             openDatePicker(setDate = true)
         }
-
     }
     private fun openDatePicker(setDate: Boolean){
         val calendar = Calendar.getInstance()

@@ -16,8 +16,6 @@ class SearchViewModel @Inject constructor(private val useCase: SearchUseCase):Ba
 
     private val _search = MutableStateFlow<Resource<TicketOfferResponse>>(Resource.Empty())
     val search = _search.asStateFlow()
-
-
     fun loadSearch(){
         viewModelScope.launch {
             useCase.getSearch().collectData(_search)

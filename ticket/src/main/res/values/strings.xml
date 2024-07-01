@@ -38,4 +38,8 @@
     <string name="date_people">23 февраля, 1 пассажир</string>
     <string name="filter">Фильтр</string>
     <string name="graf_price">График цен</string>
+    <string name="cityMinsk">Минск</string>
+    <string name="date_line">%02d:%02dч в пути</string>
+    <string name="noTransverrs">Без пересадок</string>
+    <string name="asdd">Куда угодно</string>
 </resources>

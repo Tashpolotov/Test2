@@ -1,5 +1,7 @@
 package com.example.ticket.data.di
 
+import com.example.ticket.data.mapper.DefaultDomainMapper
+import com.example.ticket.data.mapper.DomainMapper
 import com.example.ticket.data.remote.MainApiService
 import com.example.ticket.data.repository.MainRepositoryImpl
 import com.example.ticket.domain.repository.MainRepository
@@ -23,8 +25,12 @@ object MainModule {
     }
 
     @Provides
+    fun provideDomainMapper(): DomainMapper {
+        return DefaultDomainMapper() 
+    }
+    @Provides
     @Singleton
-    fun provideRepository(apiService: MainApiService): MainRepository {
-        return MainRepositoryImpl(apiService)
+    fun provideRepository(apiService: MainApiService, mapper: DomainMapper): MainRepository {
+        return MainRepositoryImpl(apiService, mapper)
     }
 }

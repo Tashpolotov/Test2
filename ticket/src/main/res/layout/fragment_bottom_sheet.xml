@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bottom_sheet_corner"
-    >
-
+    tools:context=".presentation.ui.fragments.tiketfragment.BottomSheetFragment">
 
     <View
         android:id="@+id/view"
@@ -398,10 +398,6 @@
         app:layout_constraintTop_toBottomOf="@id/const_container"
         app:layout_constraintBottom_toBottomOf="parent">
 
-
-
     </LinearLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

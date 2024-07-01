@@ -10,22 +10,24 @@ import com.example.ticket.R
 import com.example.ticket.databinding.FragmentAllTicketsBinding
 import com.example.ticket.presentation.ui.fragments.allticketfragment.adapter.AllTicketsAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AllTicketsFragment : BaseFragment(R.layout.fragment_all_tickets) {
 
     private val binding by viewBinding(FragmentAllTicketsBinding::bind)
     private val viewModel by viewModels<AllTicketsViewModel>()
-    private val adapter = AllTicketsAdapter()
-    private lateinit var sharedPref: SharedPref
+    private lateinit var adapter : AllTicketsAdapter
+    @Inject
+    lateinit var sharedPref: SharedPref
 
     override fun initialize() {
+        adapter = AllTicketsAdapter(requireContext())
         binding.rv.adapter = adapter
         viewModel.loadAllTickets()
-        sharedPref = SharedPref(requireContext())
 
         val selectedName = sharedPref.selectedName
-        val selectedUserCity = sharedPref.selectedUserCity ?: "Минск"
+        val selectedUserCity = sharedPref.selectedUserCity ?: getString(R.string.cityMinsk)
 
         if (selectedName != null && selectedUserCity != null) {
             binding.tvWhere.text = "$selectedUserCity-$selectedName"

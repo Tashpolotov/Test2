@@ -1,4 +1,3 @@
-/*
 package com.example.ticket.data.mapper
 
 import com.example.ticket.data.model.alltikets.AllTicketsData
@@ -14,41 +13,11 @@ import com.example.ticket.domain.model.mainscreen.OfferResponse
 import com.example.ticket.domain.model.mainscreen.Price
 import com.example.ticket.domain.model.search.TicketOfferResponse
 
-
-fun OfferResponseData.toOfferResponse() = OfferResponse(
-    offers.map { it.toOffer() }
-)
-
-fun TicketOfferResponseData.toTicket() = TicketOfferResponse(
-    ticketsOffers
-)
-
-fun AllTicketsData.toAllTickets() = AllTickets(
-    tickets.map { it.toAllTickets() }
-)
-
-fun TicketData.toAllTickets() = Ticket(
-    arrival,
-    badge,
-    company,
-    departure,
-    handLuggage,
-    hasTransfer,
-    hasVisaTransfer,
-    id,
-    isExchangable,
-    isReturnable,
-    luggage,
-    price,
-    providerName
-)
-
-fun OfferData.toOffer() = Offer(
-    id, title, town, price.toPrice()
-)
-
-
-fun PriceData.toPrice() = Price(
-    value
-)
-*/
+interface DomainMapper {
+    fun mapToOfferResponse(data: OfferResponseData): OfferResponse
+    fun mapToTicketOfferResponse(data: TicketOfferResponseData): TicketOfferResponse
+    fun mapToAllTickets(data: AllTicketsData): AllTickets
+    fun mapToTicket(data: TicketData): Ticket
+    fun mapToOffer(data: OfferData): Offer
+    fun mapToPrice(data: PriceData): Price
+}

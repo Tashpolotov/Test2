@@ -22,7 +22,6 @@ class SharedPref @Inject constructor(@ApplicationContext context: Context) {
         get() = sharedPreferences.getString(CITY, null)
         set(value) {
             sharedPreferences.edit().putString(CITY, value).apply()
-            Log.d("SharedPref", "Saved city: $value")
         }
 
     var selectedUserCity:String?

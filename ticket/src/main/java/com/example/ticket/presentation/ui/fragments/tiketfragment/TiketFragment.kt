@@ -1,40 +1,34 @@
 package com.example.ticket.presentation.ui.fragments.tiketfragment
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.DisplayMetrics
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.core_utils.SharedPref
 import com.example.core_utils.base.BaseFragment
 import com.example.ticket.R
 import com.example.ticket.databinding.FragmentTiketBinding
 import com.example.ticket.presentation.ui.fragments.tiketfragment.adapter.MainScreenAdapter
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
-
+import javax.inject.Inject
 @AndroidEntryPoint
 class TiketFragment : BaseFragment(R.layout.fragment_tiket) {
 
     private val binding by viewBinding(FragmentTiketBinding::bind)
     private val viewModel by viewModels<MainViewModel>()
     private val adapter = MainScreenAdapter()
-    private lateinit var sharedPref: SharedPref
-
+    @Inject
+    lateinit var sharedPref: SharedPref
     override fun initialize() {
         binding.rv.adapter = adapter
         viewModel.loadMainScreen()
-        sharedPref = SharedPref(requireContext())
+
         if (sharedPref.selectedUserCity != null) {
             binding.etLocationCity.setText(sharedPref.selectedUserCity)
+        } else {
+            val city = getString(R.string.minsk)
+            binding.etLocationCity.setText(city)
         }
         sharedPref.selectedName?.let { selectedCity ->
             binding.tvWhere.setText(selectedCity)
@@ -55,10 +49,7 @@ class TiketFragment : BaseFragment(R.layout.fragment_tiket) {
 
         viewModel.cyrillicFilter.value?.let { filter ->
             binding.etLocationCity.filters = arrayOf(filter)
-
         }
-
-
     }
 
     override fun initSubscribers() {
@@ -76,82 +67,8 @@ class TiketFragment : BaseFragment(R.layout.fragment_tiket) {
             }
         )
     }
-
     private fun showBottomSheet() {
-        val bottomSheetView = layoutInflater.inflate(R.layout.modal_window, null)
-        val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.setContentView(bottomSheetView)
-
-        val displayMetrics = DisplayMetrics()
-        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
-        val screenHeight = displayMetrics.heightPixels
-        dialog.behavior.peekHeight = screenHeight
-
-        // Настройка элементов Bottom Sheet
-        val imgViewStrong = bottomSheetView.findViewById<ImageView>(R.id.img_strong)
-        val imgViewHot = bottomSheetView.findViewById<ImageView>(R.id.img_hot)
-        val imgViewWeekend = bottomSheetView.findViewById<ImageView>(R.id.img_weekend)
-        val imgViewWhere = bottomSheetView.findViewById<ImageView>(R.id.img_where)
-        val tvStambul = bottomSheetView.findViewById<TextView>(R.id.tv_stambul)
-        val tvSochi = bottomSheetView.findViewById<TextView>(R.id.tv_sochi)
-        val tvPhucket = bottomSheetView.findViewById<TextView>(R.id.tv_phucket)
-        val etWhere = bottomSheetView.findViewById<TextInputEditText>(R.id.et_where)
-        val etLocationCity = bottomSheetView.findViewById<TextInputEditText>(R.id.et_location_city)
-        val const1 = bottomSheetView.findViewById<ConstraintLayout>(R.id.const1)
-        val const2 = bottomSheetView.findViewById<ConstraintLayout>(R.id.const2)
-        val const3 = bottomSheetView.findViewById<ConstraintLayout>(R.id.const3)
-
-        dialog.show()
-
-        // Обработчики нажатий элементов Bottom Sheet
-        imgViewStrong.setOnClickListener {
-            findNavController().navigate(R.id.mockFragment)
-            dialog.dismiss()
-        }
-
-        imgViewHot.setOnClickListener {
-            findNavController().navigate(R.id.mockFragment)
-            dialog.dismiss()
-        }
-
-        imgViewWeekend.setOnClickListener {
-            findNavController().navigate(R.id.mockFragment)
-            dialog.dismiss()
-        }
-
-        imgViewWhere.setOnClickListener {
-            val textToSave = "Куда угодно"
-            etWhere.setText(textToSave)
-            sharedPref.selectedName = textToSave
-            findNavController().navigate(R.id.searchCityFragment)
-            dialog.dismiss()
-        }
-
-        const1.setOnClickListener {
-            etWhere.setText(tvStambul.text)
-            findNavController().navigate(R.id.searchCityFragment)
-            sharedPref.selectedName = tvStambul.text.toString()
-            dialog.dismiss()
-        }
-
-        const2.setOnClickListener {
-            etWhere.setText(tvSochi.text)
-            findNavController().navigate(R.id.searchCityFragment)
-            sharedPref.selectedName = tvSochi.text.toString()
-            dialog.dismiss()
-        }
-
-        const3.setOnClickListener {
-            etWhere.setText(tvPhucket.text)
-            findNavController().navigate(R.id.searchCityFragment)
-            sharedPref.selectedName = tvPhucket.text.toString()
-            dialog.dismiss()
-        }
-
-        val selectedCity = sharedPref.selectedUserCity ?: "Минск"
-        etLocationCity.setText(selectedCity)
+        val bottomSheetFragment = BottomSheetFragment()
+        bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
     }
-
-
 }

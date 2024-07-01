@@ -5,7 +5,6 @@ import com.example.core_utils.Resource
 import com.example.core_utils.base.BaseViewModel
 import com.example.ticket.domain.model.allteickets.AllTickets
 import com.example.ticket.domain.usecase.AllTicketsUseCase
-import com.example.ticket.domain.usecase.MainUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,7 +16,6 @@ class AllTicketsViewModel @Inject constructor(private val useCase: AllTicketsUse
 
     private val _allTickets = MutableStateFlow<Resource<AllTickets>>(Resource.Empty())
     val allTickets = _allTickets.asStateFlow()
-
 
     fun loadAllTickets(){
         viewModelScope.launch {
